@@ -1,0 +1,23 @@
+{
+  "name": "wslibs/cunchuio",
+  "description": "Microsoft Cloud Storage SDK",
+  "type": "library",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "songyangphp",
+      "email": "475511896@qq.com"
+    }
+  ],
+
+  "autoload": {
+    "psr-4": {
+      "wslibs\\storage\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=7.0.0",
+    "microsoft/azure-storage": "^0.19.1",
+    "microsoft/windowsazure": "^0.5.7"
+  }
+}

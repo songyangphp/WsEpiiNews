@@ -1,0 +1,41 @@
+{
+    "name": "wslibs/news",
+    "description": "Epii框架新闻管理模块",
+    "authors": [
+        {
+            "name": "songyang",
+            "email": "475511896@qq.com"
+        }
+    ],
+    "require": {
+        "wslibs/cunchuio": ">=0.0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "wslibs\\news\\": "./"
+        }
+    },
+    "extra": {
+        "epii_admin_addons":{
+            "app":"wslibs\\news\\app",
+            "base_name_space":["wslibs\\news\\app"],
+            "title":"Epii框架新闻管理模块",
+            "version": "0.0.1"
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://public.master.composer.wenshi.wszx.cc"
+        }
+    ],
+    "config": {
+        "secure-http": false,
+        "http-basic": {
+            "git.wszx.cc:10101": {
+                "username": "fayuan_installer",
+                "password": "fyinstaller"
+            }
+        }
+    }
+}
