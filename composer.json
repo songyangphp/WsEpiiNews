@@ -7,9 +7,6 @@
             "email": "475511896@qq.com"
         }
     ],
-    "require": {
-        "wslibs/cunchuio": ">=0.0.1"
-    },
     "autoload": {
         "psr-4": {
             "wslibs\\news\\": "./"

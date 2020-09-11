@@ -13,10 +13,8 @@ use epii\admin\ui\lib\epiiadmin\jscmd\Refresh;
 use epii\server\Args;
 use epii\ui\upload\AdminUiUpload;
 use epii\ui\upload\driver\LocalFileUploader;
-use libs\init\cunchu_init;
 use think\Db;
 use wslibs\news\NewManger;
-use wslibs\storage\CunChuIO;
 
 class articles extends base
 {
@@ -108,18 +106,6 @@ class articles extends base
     }
 
 
-    private function init_cunchu_io()
-    {
-        CunChuIO::setConfig(array(
-            "storage_list" => ['wszxstore'],
-            "accountname" => 'wszxstore',
-            "accountkey" => 'LgYWaS8nxag0JVYzCocB+cgUvC2Dg+6g9xfwTSbSmSb13c7EjRTjw+7uz4krW1cWjunWxdhQCeGGplay95/Oyg==',
-            "storename" => 'wszxstore',
-            "rongqi" => 'jiazheng',
-        ));
-    }
-
-
     public function add()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -149,12 +135,7 @@ class articles extends base
             }
 
             if($image){
-                $ext = explode(".",$image);
-                $ext = end($ext);
-                $yun_path = date("Ymd")."/".date("YmdHis").rand(1000,9999). "." .$ext;
-                $this->init_cunchu_io();
-                CunChuIO::uploadContent($yun_path, file_get_contents("../public/upload/".$image));
-                $image = $this->_chunchu_pre . $yun_path;
+                $image = "http://".$_SERVER['HTTP_HOST'] ."/upload/". $image;
             }else{
                 $image = "";
             }

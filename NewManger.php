@@ -15,7 +15,7 @@ class NewManger
 
     public static function __getUploadHandier(): INewUpload {
         if(is_null(self::$upload_handier)){
-            self::$upload_handier = new uploadHandier();
+            self::$upload_handier = new uploadHandler();
         }
         return self::$upload_handier;
     }
