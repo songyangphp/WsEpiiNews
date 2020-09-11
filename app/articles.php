@@ -363,7 +363,7 @@ class articles extends base
         $res = AdminUiUpload::doUpload(["mp4","gif", "jpeg", "jpg", "png"], 20480000);
 
         if($res && ($arr = json_decode($res , true)) && $arr['code'] == 1){
-            $return = NewManger::__getUploadHandier()->onFile($res);
+            $return = NewManger::__getUploadHandier()->onFile($arr);
             exit($return);
         }else{
             exit(json_encode(["uploaded" => false, "url" => ""]));
