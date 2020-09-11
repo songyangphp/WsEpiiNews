@@ -15,6 +15,7 @@ use epii\ui\upload\AdminUiUpload;
 use epii\ui\upload\driver\LocalFileUploader;
 use libs\init\cunchu_init;
 use think\Db;
+use wslibs\news\NewManger;
 use wslibs\storage\CunChuIO;
 
 class articles extends base
@@ -362,13 +363,10 @@ class articles extends base
         $res = AdminUiUpload::doUpload(["mp4","gif", "jpeg", "jpg", "png"], 20480000);
 
         if($res && ($arr = json_decode($res , true)) && $arr['code'] == 1){
-            $arr['path'] = str_replace("\\","/",strtolower($arr['path']));
-            $path = $path = LocalFileUploader::getInitUploadDir() ."/". $arr['path'];
-            $this->init_cunchu_io();
-            CunChuIO::uploadContent($arr['path'],file_get_contents($path));
-
-            $url = $this->_chunchu_pre.$arr['path'];
-            exit(json_encode(["uploaded" => true, "url" => $url]));
+            $return = NewManger::__getUploadHandier()->onFile($res);
+            exit($return);
+        }else{
+            exit(json_encode(["uploaded" => false, "url" => ""]));
         }
     }
 }
