@@ -12,6 +12,7 @@
             "wslibs\\news\\": "./"
         }
     },
+    "license": "MIT",
     "extra": {
         "epii_admin_addons":{
             "app":"wslibs\\news\\app",
