@@ -74,7 +74,7 @@
 <!--                >操作-->
 <!--                </th>-->
                 <th data-formatter="epiiFormatter.btns"
-                    data-btns="edit1,del1,publish1"
+                    data-btns="edit1,del1,publish1,show"
                 >操作
                 </th>
             </tr>
@@ -96,5 +96,8 @@
         }else{
             return "<a class='btn btn-outline-danger btn-sm btn-confirm' data-msg=\"确定发布吗?\"  data-ajax='1'  href='?app=articles@is_publish&status=1&id=" + row.id + "&__addons=wslibs/news'><i class='fa fa-paper-plane' ></i>待发布</a>";
         }
+    }
+    function show(field_value, row, index,field_name) {
+        return "<a class='btn btn-sm btn-outline-success btn-dialog' title='查看文章' data-area='80%,80%' href='?app=articles@show&id=" + row.id + "&__addons=wslibs/news'>预览文章</a>";
     }
 </script>

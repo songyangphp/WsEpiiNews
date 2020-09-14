@@ -350,4 +350,15 @@ class articles extends base
             exit(json_encode(["uploaded" => false, "url" => ""]));
         }
     }
+
+    public function show()
+    {
+        $id = intval(Args::params("id/1"));
+
+        $new_info = Db::name("articles_articles")->where("id",$id)->find();
+        $new_info['addtime'] = date("Y年n月d日",$new_info['addtime']);
+
+        $this->assign("info",$new_info);
+        $this->display("articles/info");
+    }
 }
