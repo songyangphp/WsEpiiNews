@@ -16,6 +16,7 @@
         .bianji{ margin:3% auto 30px; width:95%;color: #999;font-size: 1.1em; text-align:right; }
     </style>
 </head>
+
 <body style="background:#FFF;">
 <section class="newstitle">{$info['title']}</section>
 <section class="title_date"><span>发布于</span>&nbsp;&nbsp;&nbsp;<span>{$info['addtime']}</span></section>
