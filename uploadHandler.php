@@ -10,8 +10,12 @@ class uploadHandler implements INewUpload
     public function onFile($info): string
     {
         $info['path'] = str_replace("\\","/",strtolower($info['path']));
-        $path = "http://".$_SERVER['HTTP_HOST'] ."/upload/". $info['path'];
+        if(strpos($info['path'],'http') !== false || strpos($info['path'],'https') !== false){
+            $path = $info['path'];
+        }else{
+            $path = "http://".$_SERVER['HTTP_HOST'] ."/upload/". $info['path'];
+        }
 
-        return json_encode(["uploaded" => true, "url" => $path]);
+        return json_encode(["errno" => 0, "data" => array_values([$path])]);
     }
 }

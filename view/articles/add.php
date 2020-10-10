@@ -9,7 +9,7 @@
     }
 </style>
 
-<script type="text/javascript" charset="utf-8" src="{$status_url}/ckeditor.js"></script>
+<script type="text/javascript" charset="utf-8" src="{$status_url}/wangEditor.min.js"></script>
 <form role="form" class="epii" method="post" data-form="1" action="{url articles add}&__addons=wslibs/news">
     <div class="form-group">
         <label>标题：</label>
@@ -79,12 +79,19 @@
 <!--        </div>-->
 <!--        {/loop}-->
     </div>
-    <div class="form-group">
-        <label>内容：</label>
+<!--    <div class="form-group">-->
+<!--        <label>内容：</label>-->
 <!--        <script id="editor" type="text/plain" style="width:1024px;height:500px;" name="content" data-html-content="{? $articles.content}">-->
 <!--            {? $articles.content}-->
 <!--        </script>-->
-        <textarea class="form-control" name="content" style="width: 100%;" id="editor" placeholder="请输入文章内容">{? $articles.content}</textarea>
+<!--        <textarea class="form-control" name="content" style="width: 100%;" id="editor" placeholder="请输入文章内容">{? $articles.content}</textarea>-->
+<!--    </div>-->
+    <div class="form-group">
+        <label>内容：</label>
+        <div class="form-control" style="width: 70%" id="div1">
+
+        </div>
+        <textarea id="text1" name="content" style="display: none"></textarea>
     </div>
     <div class="form-group">
         <label>状态：</label>
@@ -105,8 +112,23 @@
         <button type="submit" class="btn btn-primary">提交</button>
     </div>
 </form>
-
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<!--<script type="text/javascript" src="//unpkg.com/wangeditor/dist/wangEditor.min.js"></script>-->
 <script>
+    const E = window.wangEditor
+    const editor = new E('#div1')
+    const $text1 = $('#text1')
+    editor.config.onchange = function (html) {
+        // 第二步，监控变化，同步更新到 textarea
+        $text1.val(html)
+    }
+    editor.config.uploadImgMaxLength = 1
+    editor.config.uploadImgServer = '?app=articles@upload&__addons=wslibs/news'
+    editor.create()
+
+    // 第一步，初始化 textarea 的值
+    $text1.val(editor.txt.html())
+
     function set_tags2(){
         var tags_val = document.getElementById('tags_id').value;
         return tags_val;
@@ -184,17 +206,6 @@
     // };
     var myEditor = null;
     window.onload = function(){
-        ClassicEditor
-            .create( document.querySelector( '#editor' ), {
-                ckfinder: {
-                    uploadUrl: '?app=articles@upload&__addons=wslibs/news'
-                }
-            } )
-            .then( editor => {
-                window.editor = editor;
-            } )
-            .catch( err => {
-                console.error( err.stack );
-            } );
+
     }
 </script>

@@ -26,12 +26,12 @@ class articles extends base
         $tags_id = trim(Args::params("tagid/d"));
         $pid = trim(Args::params("pid/d"));
         $list = Db::name("articles_tags")->select();
-        $list_classify = Db::name("articles_classify")->where('status',1)->select();
-        foreach ($list_classify as $k => $v){
+        $list_classify = Db::name("articles_classify")->where('status', 1)->select();
+        foreach ($list_classify as $k => $v) {
             if ($list_classify[$k]['pid'] != 0) {
-                if($v['level'] == 3){
+                if ($v['level'] == 3) {
                     $list_classify[$k]['name'] = '|------------' . $v['name'];
-                }else{
+                } else {
                     $list_classify[$k]['name'] = '|------' . $v['name'];
                 }
             }
@@ -134,28 +134,28 @@ class articles extends base
                 $data['tags_name'] = Args::params("tags_id_name");
             }
 
-            if($image){
-                $image = "http://".$_SERVER['HTTP_HOST'] ."/upload/". $image;
-            }else{
+            if ($image) {
+                $image = "http://" . $_SERVER['HTTP_HOST'] . "/upload/" . $image;
+            } else {
                 $image = "";
             }
-            if($classify_id){
-                $classify_name = Db::name('articles_classify')->field('name')->where('id','in',$classify_id)->select();
+            if ($classify_id) {
+                $classify_name = Db::name('articles_classify')->field('name')->where('id', 'in', $classify_id)->select();
                 $classify_name_str = '';
-                if($classify_name){
-                    foreach ($classify_name as $k => $v){
-                        $classify_name_str  .= $v['name'].',';
+                if ($classify_name) {
+                    foreach ($classify_name as $k => $v) {
+                        $classify_name_str .= $v['name'] . ',';
                     }
                 }
-                $data['classify_name'] = trim($classify_name_str,',');
-                $classify_id = implode(',',$classify_id);
+                $data['classify_name'] = trim($classify_name_str, ',');
+                $classify_id = implode(',', $classify_id);
             }
             $data['title'] = $title;
             $data['desc'] = $desc;
             $data['content'] = $content;
             $data['image'] = $image;
-            $data['classify_id'] = ','.$classify_id.',';
-            $data['tags_id'] = ','.$tags_id.',';
+            $data['classify_id'] = ',' . $classify_id . ',';
+            $data['tags_id'] = ',' . $tags_id . ',';
             $data['status'] = $status;
             $data['sort'] = $sort;
 
@@ -180,36 +180,36 @@ class articles extends base
             }
             return JsCmd::make()->addCmd($alert)->run();//->url('/?app=articles@index')
         } else {
-             $tagslists = Db::name('articles_tags')->where('status', 1)->select();
-             $articles_tags = array();
+            $tagslists = Db::name('articles_tags')->where('status', 1)->select();
+            $articles_tags = array();
             if ($id = Args::params("id/d")) {
                 $articles_info = Db::name('articles_articles')->where('id', $id)->find();
-                $articles_info['tags_id'] = trim($articles_info['tags_id'],',');
+                $articles_info['tags_id'] = trim($articles_info['tags_id'], ',');
                 $this->_as_articles = $articles_info;
-                $articles_tags = explode(',',$articles_info['tags_id']);
-            }else{
-                $this->_as_articles = array('status'=>0);
+                $articles_tags = explode(',', $articles_info['tags_id']);
+            } else {
+                $this->_as_articles = array('status' => 0);
             }
-            foreach ($tagslists as $k => $v){
-                if(in_array($v['id'],$articles_tags)){
+            foreach ($tagslists as $k => $v) {
+                if (in_array($v['id'], $articles_tags)) {
                     $tagslists[$k]['issel'] = 1;
-                }else{
+                } else {
                     $tagslists[$k]['issel'] = 0;
                 }
             }
 
 
             $articles_classify = array();
-            if($id){
+            if ($id) {
                 $articles_info = Db::name('articles_articles')->where('id', $id)->find();
-                $articles_classify = explode(',',trim($articles_info['classify_id'],','));
+                $articles_classify = explode(',', trim($articles_info['classify_id'], ','));
             }
             $classifys = Db::name('articles_classify')->where('status', 1)->order('pid asc')->select();
             foreach ($classifys as $k => $v) {
                 $level_sel = Db::name('articles_classify')->where('pid', $v['id'])->find();
-                if($level_sel){
+                if ($level_sel) {
                     $classifys[$k]['nosel'] = 1;
-                }else{
+                } else {
                     $classifys[$k]['nosel'] = 0;
                 }
                 if (in_array($v['id'], $articles_classify)) {
@@ -225,7 +225,7 @@ class articles extends base
             $this->_as_tagslists = $tagslists;
             $list = Db::name("articles_articles")->select();
             $this->assign("list", $list);
-            $this->assign("status_url",$this->static_url_pre);
+            $this->assign("status_url", $this->static_url_pre);
             $this->adminUiDisplay();
         }
     }
@@ -249,12 +249,12 @@ class articles extends base
 //
 //            var_dump($tags_id);
 //            var_dump($tags_name);exit;
-        }else {
+        } else {
             $id = Args::params("id/d");
             $articles_tags = array();
-            if($id){
+            if ($id) {
                 $articles_info = Db::name('articles_articles')->where('id', $id)->find();
-                $articles_tags = explode(',',trim($articles_info['tags_id'],','));
+                $articles_tags = explode(',', trim($articles_info['tags_id'], ','));
             }
             $tagslists = Db::name('articles_tags')->where('status', 1)->select();
             foreach ($tagslists as $k => $v) {
@@ -289,16 +289,16 @@ class articles extends base
 
         $id = Args::params("id/d");
         $articles_classify = array();
-        if($id){
+        if ($id) {
             $articles_info = Db::name('articles_articles')->where('id', $id)->find();
-            $articles_classify = explode(',',trim($articles_info['classify_id'],','));
+            $articles_classify = explode(',', trim($articles_info['classify_id'], ','));
         }
         $classifys = Db::name('articles_classify')->where('status', 1)->order('pid asc')->select();
         foreach ($classifys as $k => $v) {
             $level_sel = Db::name('articles_classify')->where('pid', $v['id'])->find();
-            if($level_sel){
+            if ($level_sel) {
                 $classifys[$k]['nosel'] = 1;
-            }else{
+            } else {
                 $classifys[$k]['nosel'] = 0;
             }
             if (in_array($v['id'], $articles_classify)) {
@@ -312,21 +312,22 @@ class articles extends base
 
     }
 
-    public function is_publish(){
+    public function is_publish()
+    {
         $id = Args::params('id');
         $status = Args::params('status/d');
-        $res = Db::name('articles_articles')->where('id',$id)->update(['status'=>$status]);
-        $font_data= '';
-        if($status == 1){
+        $res = Db::name('articles_articles')->where('id', $id)->update(['status' => $status]);
+        $font_data = '';
+        if ($status == 1) {
             $font_data = '发布';
-        }else{
+        } else {
             $font_data = '己修改待发布';
         }
         if ($res) {
 //            Settings::_saveCache();
-            $cmd = Alert::make()->msg($font_data.'成功')->icon('6')->onOk(Refresh::make()->type("table"));
+            $cmd = Alert::make()->msg($font_data . '成功')->icon('6')->onOk(Refresh::make()->type("table"));
         } else {
-            $cmd = Alert::make()->msg($font_data.'失败')->icon('5')->onOk(null);
+            $cmd = Alert::make()->msg($font_data . '失败')->icon('5')->onOk(null);
         }
         echo JsCmd::make()->addCmd($cmd)->run();
     }
@@ -341,12 +342,12 @@ class articles extends base
 
     public function upload()
     {
-        $res = AdminUiUpload::doUpload(["mp4","gif", "jpeg", "jpg", "png"], 20480000);
+        $res = AdminUiUpload::doUpload(["mp4", "gif", "jpeg", "jpg", "png"], 20480000);
 
-        if($res && ($arr = json_decode($res , true)) && $arr['code'] == 1){
+        if ($res && ($arr = json_decode($res, true)) && $arr['code'] == 1) {
             $return = NewManger::__getUploadHandier()->onFile($arr);
             exit($return);
-        }else{
+        } else {
             exit(json_encode(["uploaded" => false, "url" => ""]));
         }
     }
@@ -355,10 +356,12 @@ class articles extends base
     {
         $id = intval(Args::params("id/1"));
 
-        $new_info = Db::name("articles_articles")->where("id",$id)->find();
-        $new_info['addtime'] = date("Y年n月d日",$new_info['addtime']);
+        $new_info = Db::name("articles_articles")->where("id", $id)->find();
+        $new_info['addtime'] = date("Y年n月d日", $new_info['addtime']);
 
-        $this->assign("info",$new_info);
+        $this->assign("info", $new_info);
         $this->display("articles/info");
     }
+
+
 }

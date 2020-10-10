@@ -15,7 +15,7 @@ class app extends AddonsApp
         $this->addMenu($pid,"分类管理","?app=classify@index&__addons=wslibs/news");
         $this->addMenu($pid,"文章列表","?app=articles@index&__addons=wslibs/news");
         $this->execSqlFile(__DIR__."/news.sql","epii_");
-        $this->copyDirToStatic(__DIR__."/ckeditor5");
+        $this->copyDirToStatic(__DIR__."/wangEditor");
         return true;
     }
 

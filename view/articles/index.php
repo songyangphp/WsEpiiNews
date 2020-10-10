@@ -48,7 +48,9 @@
 
     <div class="card-body table-responsive" style="padding-top: 0px">
 
-        <a class="btn btn-addtab"
+        <a class="btn btn-dialog"
+           data-area='80%,80%'
+           data-title='编辑'
            title="新增文章"
            href="{url articles add}&__addons=wslibs/news">新增</a>
     </div>
