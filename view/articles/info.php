@@ -8,6 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="HandheldFriendly" content="True">
+    <title>{$info['title']}</title>
     <style>
         .newstitle{ margin:5% auto 3%; width:93%; color:#033333;text-align:left; font-size:1.4em;}
         .title_date{ margin:0 auto 2%; width:93%; line-height:30px; color:#999999;font-size:1.1em;}
