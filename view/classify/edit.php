@@ -8,7 +8,7 @@
     </div>
     <div class="form-group">
         <label for="class">父节点：</label>
-        <select class="selectpicker" id="class" name="pid">
+        <select class="form-control" id="class" name="pid">
             <option value="0" <?php if ($classifyinfo['pid'] == 0){ ?>selected="selected"<?php } ?>>无</option>
             {:options,$list,$classifyinfo['pid']}
 

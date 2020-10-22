@@ -360,6 +360,7 @@ class articles extends base
         $new_info = Db::name("articles_articles")->where("id", $id)->find();
         $new_info['addtime'] = date("Y年n月d日", $new_info['addtime']);
 
+        $this->assign("status_url", $this->static_url_pre);
         $this->assign("info", $new_info);
         $this->display("articles/info");
     }

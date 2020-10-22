@@ -6,7 +6,7 @@
         </div>
         <div class="form-group">
         <label for="class">父分类：</label>
-        <select class="selectpicker" id="class" name="pid">
+        <select class="form-control-" id="class" name="pid">
             <option value="0">无</option>
             <?php foreach($list as $k=>$v){?>
             <option value="{$v['id']}">{$v['name']}</option>
