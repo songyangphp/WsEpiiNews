@@ -21,6 +21,7 @@ class app extends AddonsApp
 
     public function update($new_version, $old_version): bool
     {
+        $this->copyDirToStatic(__DIR__."/wangEditor");
         // TODO: Implement update() method.
         return true;
     }

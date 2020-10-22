@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{$status_url}/select_2.css">
 <style>
     .ck-editor__editable {
         min-height: 300px; !important;
@@ -7,9 +8,22 @@
     .ck-editor{
         min-width: 300px;
     }
+
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: #007bff;
+        border-color: #006fe6;
+        padding: 1px 10px;
+        color: #fff;
+    }
+
+    .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+        margin-right: 5px;
+        color: rgba(255, 255, 255, .7);
+    }
 </style>
 
 <script type="text/javascript" charset="utf-8" src="{$status_url}/wangEditor.min.js"></script>
+
 <form role="form" class="epii" method="post" data-form="1" action="{url articles add}&__addons=wslibs/news">
     <div class="form-group">
         <label>标题：</label>
@@ -26,12 +40,14 @@
             <img id="show1" src="" alt="" >
             <button class="btn btn-default"
                     data-upload="1"
+                    data-multiple="1"
                     id="btn1"
                     data-input-id="id1"
+                    data-mimetype="jpg,gif,png,jpeg,php"
                     data-img-id="show1"
                     data-img-style="width:200px;height:200px">选择</button>
         </div>
-        <input type="hidden" name="path[]" value="" id="id1">
+        <input type="hidden"  name="path[]" value="" id="id1">
 <!--        <div class="input-group">-->
 <!--            <div class="custom-file">-->
 <!--                <input type="file" class="custom-file-input" id="exampleInputFile">-->
@@ -44,7 +60,7 @@
     </div>
     <div class="form-group">
         <label>分类：</label>
-        <select multiple="" class="form-control" name="classify_id[]">
+        <select multiple="" class="form-control select2 select2-hidden-accessible" data-placeholder="可多选" name="classify_id[]">
             {loop $classifys $key=>$value}
             {if  $value['issel']==1 }
             <option value="{$value.id}" selected> {if $value['level'] == 2}|---{/if}{if $value['level'] == 3}|------{/if}{$value.name}</option>
@@ -115,6 +131,12 @@
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <!--<script type="text/javascript" src="//unpkg.com/wangeditor/dist/wangEditor.min.js"></script>-->
 <script>
+    window.onEpiiInit(function () {
+        require(["{$status_url}/select_2.js"], function () {
+            $('.select2').select2()
+        });
+    });
+
     const E = window.wangEditor
     const editor = new E('#div1')
     const $text1 = $('#text1')

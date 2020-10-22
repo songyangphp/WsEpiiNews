@@ -14,6 +14,7 @@ use epii\server\Args;
 use epii\ui\upload\AdminUiUpload;
 use epii\ui\upload\driver\LocalFileUploader;
 use think\Db;
+use wslibs\cloud_upload\CloudFileUploaderManager;
 use wslibs\news\NewManger;
 
 class articles extends base
