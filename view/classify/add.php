@@ -13,20 +13,6 @@
             <?php }?>
         </select>
         </div>
-<!--        <div class="form-group">-->
-<!--            <label>图标：</label>-->
-<!--            <input type="text" class="form-control" name="icon"  id="icon" value="fa fa-circle-o" required style="display: block;width: 58%;height: 38px">-->
-<!--            <a class="btn btn-default btn-dialog"   data-area="95%,100%" title="图标选择" href="?app=nodelist@icon&_vendor=1"  style="width: 84px">更多</a>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label>链接地址：</label>-->
-<!--            <input type="text" class="form-control" name="url" placeholder="">-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label>打开方式：</label>-->
-<!--            <span class="epii-clear"><input type="radio"   name="open_type"  value="0" checked >导航栏,<input type="radio"   name="open_type"  value="1" >新窗口</span>-->
-<!---->
-<!--        </div>-->
         <div class="form-group">
             <label>备注：</label>
             <input type="text" class="form-control" name="remark" placeholder="请输入备注信息">

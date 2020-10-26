@@ -64,17 +64,7 @@
                 <th data-field="tags_name" data-formatter="epiiFormatter" data-align="center">标签</th>
 <!--                <th data-field="image" data-formatter="epiiFormatter">图片</th>-->
                 <th data-field="status" data-formatter="epiiFormatter.switch" data-align="center">状态</th>
-                <!--                <th data-field="remark" data-formatter="epiiFormatter">备注</th>-->
                 <th data-field="sort" data-formatter="epiiFormatter">排序</th>
-<!--                <th data-formatter="epiiFormatter.btns"-->
-<!--                    data-btns="edit,del"-->
-<!--                    data-edit-url="{url articles add}&id={id}"-->
-<!--                    data-edit-title="编辑：{name}"-->
-<!--                    data-del-url="{url articles del}&id={id}"-->
-<!--                    data-del-title="删除：{name}"-->
-<!--                    data-area="70%,60%"-->
-<!--                >操作-->
-<!--                </th>-->
                 <th data-formatter="epiiFormatter.btns"
                     data-btns="edit1,del1,publish1,show"
                 >操作

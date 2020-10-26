@@ -91,19 +91,6 @@ class articles extends base
             $total = Db::name('articles_articles')->count('id');
         }
         echo json_encode(['rows' => $data, 'total' => $total]);
-
-//        $title = trim(Args::params("title"));
-//        $tags_id = trim(Args::params("tagid"));
-//        $map = [];
-//        if (!empty($title)) {
-//            $map[] = ["title", "LIKE", "%{$title}%"];
-//        }
-//        if (!empty($tags_id)) {
-//            $map[] = ["tags_id", "LIKE", "%,{$tags_id},%"];
-//        }
-//        echo $this->tableJsonData('articles', $map, function($data) {
-//            return $data;
-//        });
     }
 
 
@@ -121,22 +108,14 @@ class articles extends base
             $tags_id= Args::params("tags_id");
             $data = array();
 
-
             if($tags_id){
-//                $tags_name = Db::name('tags')->field('name')->where('id','in',$tags_id)->select();
-//                $tags_name_str = '';
-//                if($tags_name){
-//                    foreach ($tags_name as $k => $v){
-//                        $tags_name_str  .= $v['name'].',';
-//                    }
-//                }
-//                $data['tags_name'] = trim($tags_name_str,',');
-//                $tags_id = implode(',',$tags_id);
                 $data['tags_name'] = Args::params("tags_id_name");
             }
-
             if ($image) {
-                $image = "http://" . $_SERVER['HTTP_HOST'] . "/upload/" . $image;
+                if(strstr($image,'upload/') == false) {
+                    $image = LocalFileUploader::getInitUploadUrlPre() . str_replace('\\', '/', $image);//文件转换
+                    $image = "http://" . $_SERVER['HTTP_HOST'] . "/upload/" . $image;
+                }
             } else {
                 $image = "";
             }
@@ -155,8 +134,8 @@ class articles extends base
             $data['desc'] = $desc;
             $data['content'] = $content;
             $data['image'] = $image;
-            $data['classify_id'] = ',' . $classify_id . ',';
-            $data['tags_id'] = ',' . $tags_id . ',';
+            $data['classify_id'] = !empty($classify_id)?',' . $classify_id . ',':'';
+            $data['tags_id'] = !empty($tags_id)?',' . $tags_id . ',':'';
             $data['status'] = $status;
             $data['sort'] = $sort;
 
@@ -234,22 +213,6 @@ class articles extends base
     public function tags()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//            $tags_id= Args::params("tags_id/d");
-//            if($tags_id){
-//                $tags_name = Db::name('articles_tags')->field('name')->where('id','in',$tags_id)->select();
-//                $tags_name_str = '';
-//                if($tags_name){
-//                    foreach ($tags_name as $k => $v){
-//                        $tags_name_str  .= $v['name'].',';
-//                    }
-//                }
-//                $tags_name = trim($tags_name_str,',');
-//                $tags_id = implode(',',$tags_id);
-//
-//            }
-//
-//            var_dump($tags_id);
-//            var_dump($tags_name);exit;
         } else {
             $id = Args::params("id/d");
             $articles_tags = array();
@@ -277,7 +240,6 @@ class articles extends base
         $id = Args::params('id');
         $res = Db::name('articles_articles')->delete($id);
         if ($res) {
-//            Settings::_saveCache();
             $cmd = Alert::make()->msg('删除成功')->icon('6')->onOk(Refresh::make()->type("table"));
         } else {
             $cmd = Alert::make()->msg('删除失败')->icon('5')->onOk(null);
@@ -325,21 +287,12 @@ class articles extends base
             $font_data = '己修改待发布';
         }
         if ($res) {
-//            Settings::_saveCache();
             $cmd = Alert::make()->msg($font_data . '成功')->icon('6')->onOk(Refresh::make()->type("table"));
         } else {
             $cmd = Alert::make()->msg($font_data . '失败')->icon('5')->onOk(null);
         }
         echo JsCmd::make()->addCmd($cmd)->run();
     }
-
-//    public function set_tags()
-//    {
-//        $tags_id=Args::params('tags_id');
-//        $this->adminUijsArgs('tags_id',$tags_id);
-//        echo json_encode(['tags_id'=>$tags_id]);
-//    }
-
 
     public function upload()
     {

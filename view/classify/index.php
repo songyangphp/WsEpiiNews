@@ -41,10 +41,6 @@
 
                 <th data-field="id" data-formatter="epiiFormatter">ID</th>
                 <th data-field="name" data-formatter="epiiFormatter">节点名称</th>
-
-                <!--                <th data-field="pid" data-formatter="epiiFormatter">父节点</th>-->
-<!--                <th data-field="icon" data-formatter="epiiFormatter" data-align="center">图标</th>-->
-<!--                <th data-field="url" data-formatter="epiiFormatter">链接地址</th>-->
                 <th data-field="articles_count" data-btns="search" data-formatter="epiiFormatter.btns" data-search-url="{url articles index}&tagid={id}" data-search-title="查看">文章</th>
                 <th data-field="status" data-formatter="epiiFormatter.switch" data-align="center">状态</th>
                 <th data-field="remark" data-formatter="epiiFormatter">备注</th>

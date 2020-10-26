@@ -51,23 +51,5 @@
             alert();
         })
 
-        // $(".okbtn").click(function (){
-        //     var index=parent.layer.getFrameIndex(window.name);
-        //     parent.layer.close(index);
-        // }
-
-        // var i = document.getElementsByTagName('i');
-        //
-        // for (var j = 0; j < i.length; j++) {
-        //     i[j].onmouseover = function () {
-        //         this.style.cursor = 'pointer';
-        //
-        //     }
-        //     i[j].onclick = function () {
-        //         parent.set_icon(this.className);
-        //         var index=parent.layer.getFrameIndex(window.name);
-        //         parent.layer.close(index);
-        //     }
-        // }
     })
 </script>
