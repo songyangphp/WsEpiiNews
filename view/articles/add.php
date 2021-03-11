@@ -35,28 +35,19 @@
         <textarea class="form-control" rows="3" name="desc" placeholder="请输入文章简介">{? $articles.desc}</textarea>
     </div>
     <div class="form-group">
-        <label>新闻头图片：</label>
-        <div class="form-group col-sm-6">
-            <img id="show1" src="" alt="" >
-            <button class="btn btn-default"
-                    data-upload="1"
-                    data-multiple="1"
-                    id="btn1"
-                    data-input-id="id1"
-                    data-mimetype="jpg,gif,png,jpeg,php"
-                    data-img-id="show1"
-                    data-img-style="width:200px;height:200px">选择</button>
-        </div>
-        <input type="hidden"  name="path[]" value="" id="id1">
-<!--        <div class="input-group">-->
-<!--            <div class="custom-file">-->
-<!--                <input type="file" class="custom-file-input" id="exampleInputFile">-->
-<!--                <label class="custom-file-label" for="exampleInputFile">Choose file</label>-->
-<!--            </div>-->
-<!--            <div class="input-group-append">-->
-<!--                <span class="input-group-text" id="">Upload</span>-->
-<!--            </div>-->
-<!--        </div>-->
+        <label>上传头图(最多三张)</label>
+        <input type="text" class="form-control"
+               name="path" id="img2"
+               value="{$articles['image']}"
+               data-src="{$articles['img_show_url']}"
+        >
+        <button data-upload=1
+                data-multiple=1
+                class="btn btn-danger"
+                data-input-id="img2"
+                data-preview-id="img_show_2"> 上传</button>
+    </div>
+    <div id="img_show_2">
     </div>
     <div class="form-group">
         <label>分类：</label>
@@ -105,9 +96,9 @@
     <div class="form-group">
         <label>内容：</label>
         <div class="form-control" style="width: 70%" id="div1">
-
+            {$articles['content']}
         </div>
-        <textarea id="text1" name="content" style="display: none"></textarea>
+        <textarea id="text1" name="content" style="display: none">{$articles['content']}</textarea>
     </div>
     <div class="form-group">
         <label>状态：</label>
@@ -131,6 +122,42 @@
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <!--<script type="text/javascript" src="//unpkg.com/wangeditor/dist/wangEditor.min.js"></script>-->
 <script>
+    function creat_storage_task() {
+        $.ajax({
+            url: '?app=uploadApi@upload&_upload_yun=1',
+            type: 'post',
+            dataType: 'json',
+            success: function (res) {
+                console.log("看看结果",res);
+                document.getElementById("storage_file").click();
+                var formData = new FormData();
+                //formData.append("token", res.data.token);
+                formData.append("task_id", res.data.task_id);
+                $("#storage_file").change(function () {
+                    var files = $('#storage_file')[0].files;
+                    for(i=0;i<files.length;i++){
+                        formData.append("file["+i+"]", files[i]);
+                    }
+                    $.ajax({
+                        url: 'http://file.wszx.cc/index.php/storage/index/token/1367bb9afa9aa177033f0ecb5e74debf',
+                        //url: 'http://test.storage.com/index.php/storage/index',
+                        dataType: 'json',
+                        type: 'POST',
+                        data: formData,
+                        processData: false, // 使数据不做处理
+                        contentType: false, // 不要设置Content-Type请求头
+                        success: function (data) {
+                            console.log(data);
+                        },
+                        error: function (response) {
+                            console.log(response);
+                        }
+                    });
+                })
+            }
+        })
+    }
+
     window.onEpiiInit(function () {
         require(["{$status_url}/select_2.js"], function () {
             $('.select2').select2()

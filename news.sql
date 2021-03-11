@@ -2,7 +2,7 @@ CREATE TABLE `epii_articles_articles` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `title` varchar(100) NOT NULL DEFAULT '' COMMENT '文章标题',
   `desc` varchar(200) NOT NULL DEFAULT '' COMMENT '文章简介',
-  `image` varchar(200) NOT NULL DEFAULT '' COMMENT '文章图片',
+  `image` text COMMENT '文章图片',
   `content` text COMMENT '内容',
   `classify_id` varchar(200) NOT NULL DEFAULT '' COMMENT '分类id以,号隔开',
   `tags_id` varchar(200) NOT NULL DEFAULT '' COMMENT '标签id以,号隔开',

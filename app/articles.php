@@ -12,10 +12,10 @@ use epii\admin\ui\lib\epiiadmin\jscmd\JsCmd;
 use epii\admin\ui\lib\epiiadmin\jscmd\Refresh;
 use epii\server\Args;
 use epii\ui\upload\AdminUiUpload;
-use epii\ui\upload\driver\LocalFileUploader;
 use think\Db;
 use wslibs\cloud_upload\CloudFileUploaderManager;
 use wslibs\news\NewManger;
+use wslibs\storage_php_sdk\StorageManager;
 
 class articles extends base
 {
@@ -116,7 +116,7 @@ class articles extends base
             $status = trim(Args::params("status")) ?: 0;
             $sort = trim(Args::params("sort"));
             $content = Args::params("content");
-            $image = Args::params("path")[0];
+            $image = Args::params("path");
             $classify_id = Args::params("classify_id");
             $tags_id= Args::params("tags_id");
             $data = array();
@@ -135,11 +135,6 @@ class articles extends base
                 $data['tags_name'] = Args::params("tags_id_name");
             }
 
-            if ($image) {
-                $image = "http://" . $_SERVER['HTTP_HOST'] . "/upload/" . $image;
-            } else {
-                $image = "";
-            }
             if ($classify_id) {
                 $classify_name = Db::name('articles_classify')->field('name')->where('id', 'in', $classify_id)->select();
                 $classify_name_str = '';
@@ -186,6 +181,16 @@ class articles extends base
             if ($id = Args::params("id/d")) {
                 $articles_info = Db::name('articles_articles')->where('id', $id)->find();
                 $articles_info['tags_id'] = trim($articles_info['tags_id'], ',');
+                if(!empty($articles_info['image'])){
+                    $imgs = explode(",",$articles_info['image']);
+                    $img_show_url = [];
+                    foreach ($imgs as $k => $v){
+                        if(class_exists(StorageManager::class)){
+                            $img_show_url[] = StorageManager::get_cloud_root_dir() . $v;
+                        }
+                    }
+                    $articles_info['img_show_url'] = implode(",",$img_show_url);
+                }
                 $this->_as_articles = $articles_info;
                 $articles_tags = explode(',', $articles_info['tags_id']);
             } else {
