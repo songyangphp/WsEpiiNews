@@ -15,11 +15,6 @@
         </select>
     </div>
 
-<!--    <div class="form-group">-->
-<!--        <label>链接地址：</label>-->
-<!--        <input type="text" class="form-control" name="url" id="icon" value="{$classifyinfo.url}"-->
-<!--               placeholder="如:?app=config@index&_vendor=1,没有父级不填">-->
-<!--    </div>-->
     <div class="form-group">
         <label>备注：</label>
         <input type="text" class="form-control" name="remark" value="{$classifyinfo.remark}" placeholder="请输入备注信息">

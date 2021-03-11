@@ -147,7 +147,6 @@ class tags extends base
         }
         $res = Db::name('articles_tags')->delete($id);
         if ($res) {
-//            Settings::_saveCache();
             $cmd = Alert::make()->setTimeout(3000)->msg('删除成功')->icon('6')->onOk(Refresh::make()->type("table"));
         } else {
             $cmd = Alert::make()->msg('删除失败')->icon('5')->onOk(null);

@@ -60,13 +60,6 @@
             {/if}
             {/loop}
         </select>
-
-<!--        <input type="hidden" class="form-control" name="classify_id"  id="classify_id" value="{? $articles.classify_id}">-->
-<!--        <input type="text" class="form-control" name="classify_id_name"  id="classify_id_name" required style="display: block;width: 58%;height: 38px" value="">-->
-<!--        <a class="btn btn-default btn-dialog"   data-area="50%,50%" title="分类选择" href="?app=articles@classify&id={? $articles.id}"  style="width: 84px">选择分类</a>-->
-
-<!--        <input type="text" class="form-control" name="image" value="{? $articles.image}"-->
-<!--               placeholder="请输入文章图片">-->
     </div>
     <div class="form-group" style="width: 100%">
         <label>标签：</label>
@@ -74,25 +67,7 @@
 
         <input type="text" class="form-control" name="tags_id_name"  id="tags_id_name"  style="display: block;width: 58%;height: 38px" value="{? $articles.tags_name }" readonly placeholder="请选择标签">
         <a class="btn btn-default btn-dialog"   data-area="50%,50%" title="标签选择" href="?app=articles@tags&id={? $articles.id}&__addons=wslibs/news"  style="width: 84px">选择</a>
-
-<!--        {loop $tagslists $key=>$value}-->
-<!--        <div class="form-check">-->
-<!--            {if  $value['issel']==1 }-->
-<!--            <input class="form-check-input" type="checkbox" value="{$value.id}" name="tags_id[]" checked>-->
-<!--            {else}-->
-<!--            <input class="form-check-input" type="checkbox" value="{$value.id}" name="tags_id[]" >-->
-<!--            {/if}-->
-<!--            <label class="form-check-label">{$value.name}</label>-->
-<!--        </div>-->
-<!--        {/loop}-->
     </div>
-<!--    <div class="form-group">-->
-<!--        <label>内容：</label>-->
-<!--        <script id="editor" type="text/plain" style="width:1024px;height:500px;" name="content" data-html-content="{? $articles.content}">-->
-<!--            {? $articles.content}-->
-<!--        </script>-->
-<!--        <textarea class="form-control" name="content" style="width: 100%;" id="editor" placeholder="请输入文章内容">{? $articles.content}</textarea>-->
-<!--    </div>-->
     <div class="form-group">
         <label>内容：</label>
         <div class="form-control" style="width: 70%" id="div1">
@@ -230,29 +205,11 @@
                     console.log(tags_nameval_arr.toString());
                     document.getElementById('tags_id_name').value= tags_nameval_arr.join(',');
                 }
-
-
-                // var tags_nameval_arr = tags_nameval.split(',');
-                //var tags_name_diff = tags_nameval_arr.remove(tags_name);
-                //document.getElementById('tags_id_name').value= tags_name_diff.join(',');
             }
         }
 
-
     }
 
-    // Array.prototype.indexOf = function(val) {
-    //     for (var i = 0; i < this.length; i++) {
-    //         if (this[i] == val) return i;
-    //     }
-    //     return -1;
-    // };
-    // Array.prototype.remove = function(val) {
-    //     var index = this.indexOf(val);
-    //     if (index > -1) {
-    //         this.splice(index, 1);
-    //     }
-    // };
     var myEditor = null;
     window.onload = function(){
 

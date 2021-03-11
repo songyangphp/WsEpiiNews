@@ -106,16 +106,6 @@ class classify extends base
             $status = trim(Args::params("status")) ?: 0;
             $sort = trim(Args::params("sort"));
 
-//            if (!$name || !$icon) {
-//                $alert = Alert::make()->msg("缺少参数")->icon('5')->title("重要提示")->btn("好的");
-//                return JsCmd::make()->addCmd($alert)->run();
-//            }
-
-//            if ($pid != 0 && !$url) {
-//                $alert = Alert::make()->msg("URL不能是空")->icon('5')->title("重要提示")->btn("好的");
-//                return JsCmd::make()->addCmd($alert)->run();
-//            }
-
             if (Db::name('articles_classify')->where("name = '$name'")->find()) {
                 $alert = Alert::make()->msg($name . "此分类已存在")->icon('5')->title("重要提示")->btn("好的");
                 return JsCmd::make()->addCmd($alert)->run();
@@ -127,7 +117,6 @@ class classify extends base
             $data['status'] = $status;
             $data['sort'] = $sort;
             $data['icon'] = $icon;
-
             $data['url'] =  $url;
             $data['open_type'] = (int) Args::params("open_type");
 
@@ -209,17 +198,6 @@ class classify extends base
             $remark = trim(Args::params("remark"));
             $status = trim(Args::params("status")) ?: 0;
             $sort = trim(Args::params("sort"));
-
-
-//            if (!$name || !$icon) {
-//                $alert = Alert::make()->msg("缺少参数")->icon('5')->title("重要提示")->btn("好的");
-//                return JsCmd::make()->addCmd($alert)->run();
-//            }
-//
-//            if ($pid != 0 && !$url) {
-//                $alert = Alert::make()->msg("URL不能是空")->icon('5')->title("重要提示")->btn("好的");
-//                return JsCmd::make()->addCmd($alert)->run();
-//            }
 
             $data['name'] = $name;
             $data['pid'] = $pid;
@@ -314,17 +292,5 @@ class classify extends base
         }
         echo JsCmd::make()->addCmd($cmd)->run();
     }
-
-//    public function icon()
-//    {
-//        $this->adminUiDisplay('nodelist/icon');
-//    }
-
-//    public function set_icon()
-//    {
-//        $icon=Args::params('icon');
-//        $this->adminUijsArgs('icon',$icon);
-//        echo json_encode(['icon'=>$icon]);
-//    }
 
 }
